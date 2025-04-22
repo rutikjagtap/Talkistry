@@ -68,3 +68,4 @@ Simply open [Lovable](https://lovable.dev/projects/73af1ce3-2015-4a1e-8b59-d1693
 
 We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
 # Talkistry
+# Talkistry
