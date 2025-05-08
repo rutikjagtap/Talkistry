@@ -1,24 +1,36 @@
+
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 interface AnimatedTextProps {
   text: string;
-  className?: string;
   once?: boolean;
+  className?: string;
+  speed?: number;
 }
 
-const AnimatedText = ({ text, className = "", once = false }: AnimatedTextProps) => {
-  // Split text into array of words
-  const words = text.split(' ');
-  
-  // Animation for each word
+const AnimatedText: React.FC<AnimatedTextProps> = ({ 
+  text, 
+  once = false, 
+  className = "", 
+  speed = 0.05
+}) => {
+  const [isInView, setIsInView] = useState(false);
+
+  useEffect(() => {
+    setIsInView(true);
+  }, []);
+
+  const words = text.split(" ");
+
   const container = {
-    hidden: {},
+    hidden: { opacity: 0 },
     visible: (i = 1) => ({
-      transition: { staggerChildren: 0.12, delayChildren: 0.04 * i },
+      opacity: 1,
+      transition: { staggerChildren: speed, delayChildren: 0.04 * i },
     }),
   };
-  
-  // Animation for each word
+
   const child = {
     visible: {
       opacity: 1,
@@ -39,23 +51,22 @@ const AnimatedText = ({ text, className = "", once = false }: AnimatedTextProps)
       },
     },
   };
-  
+
   return (
     <motion.div
-      style={{ overflow: 'hidden' }}
+      className={`overflow-hidden flex flex-wrap ${className}`}
       variants={container}
       initial="hidden"
-      whileInView="visible"
+      animate={isInView ? "visible" : "hidden"}
       viewport={{ once }}
-      className={className}
     >
-      {words.map((word, i) => (
+      {words.map((word, index) => (
         <motion.span
-          key={i}
+          key={index}
+          className="mr-1 inline-block"
           variants={child}
-          className="inline-block mr-1"
         >
-          {word + ' '}
+          {word}{' '}
         </motion.span>
       ))}
     </motion.div>
