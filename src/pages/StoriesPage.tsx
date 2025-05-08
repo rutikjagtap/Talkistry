@@ -1,12 +1,14 @@
-import { useState } from "react";
+
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { BookOpen, Mic, MicOff, RefreshCw } from "lucide-react";
+import { BookOpen, Mic, BookHeadphones, BookOpenCheck } from "lucide-react";
 import AnimatedText from '../components/ui/AnimatedText';
 import ScrollIndicator from '../components/ui/ScrollIndicator';
 import ImageReveal from '../components/ui/ImageReveal';
 import StoryModal from "../components/ui/StoryModal";
 import ReadAloud from "../components/ui/ReadAloud";
-
+import StoryCard from "../components/ui/StoryCard";
+import FloatingShapes from "../components/ui/FloatingShapes";
 interface Story {
   title: string;
   excerpt: string;
@@ -15,15 +17,16 @@ interface Story {
   content: string;
 }
 
+// Sample story data
 const stories: Story[] = [
-    {
-        title: "The Friendship Tree",
-        excerpt: "In the heart of Jaipur, a special tree stood tall in a park, where children gathered to share their dreams and secrets. When a shy new girl, Emily, arrived, the tree became her refuge. Through kindness and friendship, she found her place, learning valuable lessons about love, forgiveness, and the power of true companionship.",
-        image: "https://pplx-res.cloudinary.com/image/upload/v1743350723/user_uploads/rPlLupbTxRvhekv/Screenshot-from-2025-03-30-19-56-22.jpg",
-        category: "Friendship & Life Lessons",
-        content: `In the heart of the city Jaipur, there was a park where children would play and laugh. Among the trees, there was one special tree, an old and gnarled oak that had been there for generations. This tree was known as the Friendship Tree, and it was a place where children would gather to share their secrets and dreams.
+  {
+    title: "The Friendship Tree",
+    excerpt: "In the heart of Jaipur, a special tree stood tall in a park, where children gathered to share their dreams and secrets. When a shy new girl, Emily, arrived, the tree became her refuge. Through kindness and friendship, she found her place, learning valuable lessons about love, forgiveness, and the power of true companionship.",
+    image: "https://pplx-res.cloudinary.com/image/upload/v1743350723/user_uploads/rPlLupbTxRvhekv/Screenshot-from-2025-03-30-19-56-22.jpg",
+    category: "Friendship & Life Lessons",
+    content: `In the heart of the city Jaipur, there was a park where children would play and laugh. Among the trees, there was one special tree, an old and gnarled oak that had been there for generations. This tree was known as the Friendship Tree, and it was a place where children would gather to share their secrets and dreams.
 
-    One day, a new girl named Emily moved to the city. She was shy and lonely, and she didn't know anyone. She wandered through the park, looking for a place to belong. When she saw the Friendship Tree, she knew that she had found her home.
+One day, a new girl named Emily moved to the city. She was shy and lonely, and she didn't know anyone. She wandered through the park, looking for a place to belong. When she saw the Friendship Tree, she knew that she had found her home.
 
 Emily sat under the tree and watched the other children play. There was Maya, always sketching in her notebook, dreaming of being an artist. Liam, energetic and competitive, was practicing his football skills. And Aisha, kind and gentle, was reading a book of poetry. They were a diverse group, each with their own unique talents and personalities. Emily longed to join them, but fear held her back.
 
@@ -40,46 +43,46 @@ Emily, remembering her own initial shyness and how kindness had drawn her in, de
 Another time, Aisha's family faced a difficult situation. They were struggling financially, and Aisha had to give up her dream of going to a special art camp. Emily, remembering how Maya had first approached her, organized a small fundraiser within their group. They sold their drawings, performed small plays, and collected donations. Their efforts, though small, helped Aisha attend the camp. Seeing Aisha's joy filled Emily with a sense of fulfillment. She understood that true happiness came not from what you received, but from what you gave.
 
 As the years passed, the friends grew up. They went to different schools and pursued different dreams. But they never forgot the lessons they learned under the Friendship Tree. They learned the importance of kindness, the power of forgiveness, and the strength of true friendship. And they learned that what you put out into the world, whether good or bad, eventually comes back to you. The Friendship Tree stood tall, a silent testament to their bond, its branches reaching towards the sky like outstretched arms, ready to embrace new generations of friends.`
-    },
-    {
-        title: "The Melody of Giving",
-        excerpt: "In a lively village by a shimmering river, young Rohan dreamed of playing the flute, but his family couldn't afford one. Despite setbacks, he found music in the world around him. When he helped Mrs. Chatterjee in her beautiful garden, he discovered that kindness and generosity create melodies more beautiful than any instrument ever could.",
-        image: "https://pplx-res.cloudinary.com/image/upload/v1743350722/user_uploads/SZnFLFjqLEoCFPd/Screenshot-from-2025-03-30-19-58-00.jpg",
-        category: "Kindness & Dreams",
-        content: `In a vibrant village nestled beside a shimmering river, lived a young boy named Rohan. Rohan loved music. He would often sit by the riverbank, listening to the gentle murmur of the water and composing melodies in his head. He dreamed of playing the flute, but his family couldn't afford one.... Across the river lived an old woman named Mrs. Chatterjee. She was known for her beautiful garden, overflowing with colorful flowers and fragrant herbs. Rohan would often admire her garden from afar, wishing he could wander through its fragrant paths.
+  },
+  {
+    title: "The Melody of Giving",
+    excerpt: "In a lively village by a shimmering river, young Rohan dreamed of playing the flute, but his family couldn't afford one. Despite setbacks, he found music in the world around him. When he helped Mrs. Chatterjee in her beautiful garden, he discovered that kindness and generosity create melodies more beautiful than any instrument ever could.",
+    image: "https://pplx-res.cloudinary.com/image/upload/v1743350722/user_uploads/SZnFLFjqLEoCFPd/Screenshot-from-2025-03-30-19-58-00.jpg",
+    category: "Kindness & Dreams",
+    content: `In a vibrant village nestled beside a shimmering river, lived a young boy named Rohan. Rohan loved music. He would often sit by the riverbank, listening to the gentle murmur of the water and composing melodies in his head. He dreamed of playing the flute, but his family couldn't afford one.... Across the river lived an old woman named Mrs. Chatterjee. She was known for her beautiful garden, overflowing with colorful flowers and fragrant herbs. Rohan would often admire her garden from afar, wishing he could wander through its fragrant paths.
 
-    One day, a traveling musician came to the village. He played the flute with such passion and skill that Rohan was mesmerized. After the performance, Rohan approached the musician, his eyes shining with admiration. He confessed his dream of learning to play.
+One day, a traveling musician came to the village. He played the flute with such passion and skill that Rohan was mesmerized. After the performance, Rohan approached the musician, his eyes shining with admiration. He confessed his dream of learning to play.
 
-    The musician smiled kindly. "Music lives within you, young man," he said. "But a flute is a tool. You must find your own way to make music until you have one."
+The musician smiled kindly. "Music lives within you, young man," he said. "But a flute is a tool. You must find your own way to make music until you have one."
 
-    Inspired, Rohan began experimenting. He tried making flutes from reeds and bamboo, but none produced the sweet melody he longed for. He even tried whistling tunes, but it wasn't the same. He felt a pang of discouragement. Maybe I'm just not meant to be a musician, he thought. Maybe it's just a silly dream.
+Inspired, Rohan began experimenting. He tried making flutes from reeds and bamboo, but none produced the sweet melody he longed for. He even tried whistling tunes, but it wasn't the same. He felt a pang of discouragement. Maybe I'm just not meant to be a musician, he thought. Maybe it's just a silly dream.
 
-    One day, while walking by Mrs. Chatterjee's garden, he noticed she was struggling to carry a heavy watering can. Without hesitation, Rohan rushed to help her. He carried the can, watered the plants, and even helped her weed some flowerbeds. As he worked, he listened. The gurgling of the water as it filled the can, the rhythmic snip of the shears as he trimmed the overgrown herbs, the buzzing of the bees flitting from flower to flower – all these sounds began to weave themselves into a new melody in his mind.
+One day, while walking by Mrs. Chatterjee's garden, he noticed she was struggling to carry a heavy watering can. Without hesitation, Rohan rushed to help her. He carried the can, watered the plants, and even helped her weed some flowerbeds. As he worked, he listened. The gurgling of the water as it filled the can, the rhythmic snip of the shears as he trimmed the overgrown herbs, the buzzing of the bees flitting from flower to flower – all these sounds began to weave themselves into a new melody in his mind.
 
-    Mrs. Chatterjee was grateful. "Thank you, Rohan," she said. "You're a kind and helpful boy."
+Mrs. Chatterjee was grateful. "Thank you, Rohan," she said. "You're a kind and helpful boy."
 
-    Rohan blushed. "It was nothing, Mrs. Chatterjee," he replied. But as he helped her, he noticed the rhythmic sound of the water flowing into the can, the gentle rustle of the leaves, and the buzzing of the bees. He realized that music was all around him, even in the simplest of things. He began to truly listen.
+Rohan blushed. "It was nothing, Mrs. Chatterjee," he replied. But as he helped her, he noticed the rhythmic sound of the water flowing into the can, the gentle rustle of the leaves, and the buzzing of the bees. He realized that music was all around him, even in the simplest of things. He began to truly listen.
 
-    He started listening more closely to the sounds of the village – the chirping of the birds, the clanging of the blacksmith's hammer, the laughter of children playing. He began to create rhythms and melodies from these everyday sounds. He tapped on pots and pans, hummed along with the wind, and even used two sticks to create percussive beats. He discovered the music in the rhythm of his own footsteps, the creaking of the old wooden bridge, and the splashing of the river against the rocks. He felt a renewed sense of hope. Maybe he could make music, even without a flute.
+He started listening more closely to the sounds of the village – the chirping of the birds, the clanging of the blacksmith's hammer, the laughter of children playing. He began to create rhythms and melodies from these everyday sounds. He tapped on pots and pans, hummed along with the wind, and even used two sticks to create percussive beats. He discovered the music in the rhythm of his own footsteps, the creaking of the old wooden bridge, and the splashing of the river against the rocks. He felt a renewed sense of hope. Maybe he could make music, even without a flute.
 
-    One afternoon, Mrs. Chatterjee was sitting in her garden, listening to the birds sing. Rohan, inspired by the birdsong, began tapping out a rhythm on a nearby wooden bench. The rhythm was complex and beautiful, reflecting the sounds of the garden.
+One afternoon, Mrs. Chatterjee was sitting in her garden, listening to the birds sing. Rohan, inspired by the birdsong, began tapping out a rhythm on a nearby wooden bench. The rhythm was complex and beautiful, reflecting the sounds of the garden.
 
-    Mrs. Chatterjee listened intently. "That's beautiful, Rohan," he said. "It sounds like the music of the garden itself."
+Mrs. Chatterjee listened intently. "That's beautiful, Rohan," he said. "It sounds like the music of the garden itself."
 
-    Rohan smiled. He had found his own way to make music, not with a flute, but with the world around him.
+Rohan smiled. He had found his own way to make music, not with a flute, but with the world around him.
 
-    A few weeks later, a traveling merchant came to the village. He had a small, beautifully crafted flute for sale. Rohan, remembering the musician's words, didn't feel the same longing as before. He had discovered the music within himself and the world around him.
+A few weeks later, a traveling merchant came to the village. He had a small, beautifully crafted flute for sale. Rohan, remembering the musician's words, didn't feel the same longing as before. He had discovered the music within himself and the world around him.
 
-    Mrs. Chatterjee, however, had noticed Rohan's passion for music and his kindness towards her. She purchased the flute from the merchant and presented it to Rohan.
+Mrs. Chatterjee, however, had noticed Rohan's passion for music and his kindness towards her. She purchased the flute from the merchant and presented it to Rohan.
 
-    "This is for you, Rohan," she said. "Your kindness and your love for music have touched my heart."... Rohan was overwhelmed with gratitude. He took the flute and began to play, the melody flowing from his heart, inspired by the sounds of the river, the birds, the garden, and the kindness of an old woman. He realized that his willingness to help others, his act of giving, had brought him his heart's desire. He learned that sometimes, the most beautiful melodies are born not from what we receive, but from what we give. And in giving, we often receive more than we could ever imagine.`
-    },
-    {
-        title: "The Weaver's Secret",
-        excerpt: "In a village nestled among rolling hills, young Tara dreamed of weaving, inspired by her grandmother’s intricate tapestries. When a storm devastated her home, she discovered that weaving wasn’t just about creating beauty—it was about preserving stories and connecting lives. Through acts of kindness, she caught the attention of the reclusive Master Elara, who revealed that the true magic of weaving lay in empathy, storytelling, and the threads that bind us all.",
-        image: "https://pplx-res.cloudinary.com/image/upload/v1743350723/user_uploads/VoSJxlALiUtVsXR/Screenshot-from-2025-03-30-19-57-22.jpg",
-        category: "Wisdom & Creativity",
-        content: `In a small village nestled amidst rolling hills, lived a young girl named Tara. Tara was fascinated by the art of weaving. She would watch her grandmother, a master weaver, create intricate tapestries filled with vibrant colors and captivating patterns. Tara dreamed of weaving her own stories, but her family needed her to help in the fields, leaving little time for her passion.
+"This is for you, Rohan," she said. "Your kindness and your love for music have touched my heart."... Rohan was overwhelmed with gratitude. He took the flute and began to play, the melody flowing from his heart, inspired by the sounds of the river, the birds, the garden, and the kindness of an old woman. He realized that his willingness to help others, his act of giving, had brought him his heart's desire. He learned that sometimes, the most beautiful melodies are born not from what we receive, but from what we give. And in giving, we often receive more than we could ever imagine.`
+  },
+  {
+    title: "The Weaver's Secret",
+    excerpt: "In a village nestled among rolling hills, young Tara dreamed of weaving, inspired by her grandmother's intricate tapestries. When a storm devastated her home, she discovered that weaving wasn't just about creating beauty—it was about preserving stories and connecting lives. Through acts of kindness, she caught the attention of the reclusive Master Elara, who revealed that the true magic of weaving lay in empathy, storytelling, and the threads that bind us all.",
+    image: "https://pplx-res.cloudinary.com/image/upload/v1743350723/user_uploads/VoSJxlALiUtVsXR/Screenshot-from-2025-03-30-19-57-22.jpg",
+    category: "Wisdom & Creativity",
+    content: `In a small village nestled amidst rolling hills, lived a young girl named Tara. Tara was fascinated by the art of weaving. She would watch her grandmother, a master weaver, create intricate tapestries filled with vibrant colors and captivating patterns. Tara dreamed of weaving her own stories, but her family needed her to help in the fields, leaving little time for her passion.
 
 Across the village lived a renowned but reclusive weaver, Master Elara. Rumors swirled around her – some said she possessed magical looms, others whispered she knew the secrets of weaving dreams. Tara longed to learn from her, but Master Elara rarely accepted apprentices.
 
@@ -109,7 +112,7 @@ Years later, Tara became a renowned weaver herself. Her tapestries were not just
   }
 ];
 
-const StoryPage = () => {
+const StoryPage: React.FC = () => {
   const [selectedStory, setSelectedStory] = useState<Story | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -119,29 +122,33 @@ const StoryPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-rose-50 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-story-light to-white">
       {/* Hero Section */}
-      <section className="h-screen flex flex-col justify-center items-center pt-20 px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="container mx-auto max-w-5xl"
-        >
-          <div className="text-center mb-8">
+      <section className="relative h-screen flex flex-col justify-center items-center px-4 overflow-hidden">
+        <FloatingShapes />
+        
+        <div className="relative z-10 container mx-auto max-w-5xl">
+          <motion.div
+            className="text-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
             <motion.div 
-              className="inline-block px-3 py-1 mb-6 rounded-full bg-rose-100 text-rose-600 text-xs font-semibold tracking-wider"
+              className="inline-block px-4 py-1.5 mb-6 rounded-full bg-story-accent text-story-primary text-xs font-semibold tracking-wider"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
+              whileHover={{ scale: 1.05 }}
             >
               INTERACTIVE READING
             </motion.div>
             
-            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-4 tracking-tight leading-tight">
+            <h1 className="text-4xl md:text-6xl font-bold text-story-dark mb-6 tracking-tight">
               <AnimatedText 
                 text="Read Aloud & Learn Together" 
                 once={true}
+                className="leading-tight"
               />
             </h1>
             
@@ -151,60 +158,181 @@ const StoryPage = () => {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.6 }}
             >
-              Practice reading with instant feedback. Our stories help you improve pronunciation and confidence.
+              Practice reading with instant feedback. Our stories help children improve pronunciation, 
+              fluency, and confidence while having fun.
             </motion.p>
-          </div>
+            
+            <motion.div 
+              className="mt-8 flex flex-wrap justify-center gap-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              <motion.button
+                className="px-6 py-3 bg-story-primary text-white rounded-full font-medium shadow-lg shadow-story-primary/20 flex items-center gap-2"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Mic size={18} />
+                Start Reading
+              </motion.button>
+              
+              <motion.button
+                className="px-6 py-3 bg-white text-story-primary border border-story-primary/20 rounded-full font-medium shadow-md flex items-center gap-2"
+                whileHover={{ scale: 1.05, backgroundColor: "rgba(229, 222, 255, 0.5)" }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <BookHeadphones size={18} />
+                Listen to Stories
+              </motion.button>
+            </motion.div>
+          </motion.div>
 
           <motion.div 
-            className="flex justify-center mt-10"
+            className="flex justify-center mt-16"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
           >
             <ScrollIndicator />
           </motion.div>
-        </motion.div>
+          
+          {/* Stats banner */}
+          <motion.div 
+            className="absolute bottom-10 left-0 right-0 mx-auto max-w-4xl"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1 }}
+          >
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow-lg">
+              <div className="text-center p-2">
+                <p className="text-story-primary font-bold text-2xl">500+</p>
+                <p className="text-gray-600 text-sm">Stories</p>
+              </div>
+              <div className="text-center p-2">
+                <p className="text-story-primary font-bold text-2xl">50k+</p>
+                <p className="text-gray-600 text-sm">Happy Readers</p>
+              </div>
+              <div className="text-center p-2">
+                <p className="text-story-primary font-bold text-2xl">12+</p>
+                <p className="text-gray-600 text-sm">Languages</p>
+              </div>
+              <div className="text-center p-2">
+                <p className="text-story-primary font-bold text-2xl">4.9</p>
+                <p className="text-gray-600 text-sm">Star Rating</p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+        
+        {/* Background pattern */}
+        <div className="absolute inset-0 bubble-pattern opacity-70 z-0"></div>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-16 px-4 bg-white">
+        <div className="container mx-auto max-w-6xl">
+          <motion.div 
+            className="text-center mb-12"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl font-bold text-story-dark mb-4">Why Practice With Us?</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">Our interactive reading platform helps children build confidence and literacy skills through engaging stories and real-time feedback.</p>
+          </motion.div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <motion.div 
+              className="p-6 bg-story-light rounded-xl"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              viewport={{ once: true }}
+            >
+              <div className="w-12 h-12 bg-story-primary/20 rounded-full flex items-center justify-center mb-4">
+                <Mic className="text-story-primary" size={24} />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Voice Recognition</h3>
+              <p className="text-gray-600">Practice pronunciation with our advanced speech recognition technology that provides instant feedback.</p>
+            </motion.div>
+            
+            <motion.div 
+              className="p-6 bg-story-light rounded-xl"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              <div className="w-12 h-12 bg-story-primary/20 rounded-full flex items-center justify-center mb-4">
+                <BookOpenCheck className="text-story-primary" size={24} />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Engaging Stories</h3>
+              <p className="text-gray-600">Carefully crafted stories that teach valuable life lessons while making reading practice fun.</p>
+            </motion.div>
+            
+            <motion.div 
+              className="p-6 bg-story-light rounded-xl"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              viewport={{ once: true }}
+            >
+              <div className="w-12 h-12 bg-story-primary/20 rounded-full flex items-center justify-center mb-4">
+                <BookHeadphones className="text-story-primary" size={24} />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Audio Narration</h3>
+              <p className="text-gray-600">Professional narrations help children understand pronunciation and develop listening skills.</p>
+            </motion.div>
+          </div>
+        </div>
       </section>
 
       {/* Story List Section */}
-      <section className="bg-white py-12 px-4">
-        <div className="container mx-auto">
-          <h2 className="text-3xl font-semibold text-center text-gray-800 mb-8">
-            Choose Your Story
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <section id="stories-section" className="py-16 px-4 bg-gradient-to-b from-white to-story-light/50">
+        <div className="container mx-auto max-w-6xl">
+          <motion.div 
+            className="text-center mb-12"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <div className="inline-block px-3 py-1 mb-4 rounded-full bg-story-accent text-story-primary text-xs font-semibold tracking-wider">
+              OUR COLLECTION
+            </div>
+            <h2 className="text-3xl font-bold text-story-dark mb-4">Choose Your Story</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">Explore our collection of engaging stories designed to improve reading skills and spark imagination.</p>
+          </motion.div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {stories.map((story, index) => (
-              <motion.div
+              <StoryCard 
                 key={index}
-                className="bg-rose-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-              >
-                <ImageReveal src={story.image} alt={story.title} />
-                <div className="p-4">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                    {story.title}
-                  </h3>
-                  <p className="text-gray-700 leading-relaxed">
-                    {story.excerpt}
-                  </p>
-                  <div className="mt-4 flex justify-between items-center">
-                    <span className="text-rose-600 font-semibold">
-                      {story.category}
-                    </span>
-                    <button
-                      className="flex items-center gap-2 bg-rose-200 text-rose-700 py-2 px-4 rounded-full hover:bg-rose-300 transition-colors duration-300"
-                      onClick={() => openStory(story)}
-                    >
-                      <BookOpen size={16} />
-                      Read Story
-                    </button>
-                  </div>
-                </div>
-              </motion.div>
+                story={story}
+                index={index}
+                onSelect={openStory}
+              />
             ))}
           </div>
+          
+          <motion.div 
+            className="mt-12 text-center"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            viewport={{ once: true }}
+          >
+            <motion.button
+              className="px-6 py-3 bg-story-accent text-story-primary rounded-full font-medium shadow-md inline-flex items-center gap-2"
+              whileHover={{ scale: 1.05, backgroundColor: "rgba(229, 222, 255, 0.8)" }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <BookOpen size={18} />
+              View All Stories
+            </motion.button>
+          </motion.div>
         </div>
       </section>
 
