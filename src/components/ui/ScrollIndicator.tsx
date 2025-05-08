@@ -1,31 +1,29 @@
-
+import React from 'react';
 import { motion } from 'framer-motion';
+import { ChevronDown } from 'lucide-react';
 
-const ScrollIndicator = () => {
+const ScrollIndicator: React.FC = () => {
+  const scrollToStories = () => {
+    const storiesSection = document.getElementById('stories-section');
+    if (storiesSection) {
+      storiesSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <motion.div
-      className="flex flex-col items-center mt-10"
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 1.5, duration: 0.5 }}
+      className="flex flex-col items-center cursor-pointer"
+      onClick={scrollToStories}
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.9 }}
     >
       <span className="text-sm text-gray-500 mb-2">Scroll to explore</span>
       <motion.div
-        className="w-0.5 h-10 bg-gray-300 rounded-full relative overflow-hidden"
-        initial={{ opacity: 0.6 }}
-        animate={{ opacity: 1 }}
+        className="bg-story-primary/20 p-2 rounded-full"
+        animate={{ y: [0, 5, 0] }}
+        transition={{ repeat: Infinity, duration: 1.5 }}
       >
-        <motion.span
-          className="absolute top-0 left-0 right-0 h-5 bg-primary rounded-full"
-          animate={{ 
-            y: [0, 30, 0],
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
+        <ChevronDown size={20} className="text-story-primary" />
       </motion.div>
     </motion.div>
   );
