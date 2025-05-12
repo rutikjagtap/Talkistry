@@ -4,7 +4,7 @@ import { Star, User } from "lucide-react";
 
 const testimonials = [
   {
-    name: "Ashis Nikam",
+    name: "Ashish Nikam",
     role: "Marketing Manager",
     content: "Talkistry transformed my presentation skills. I'm now more confident in client meetings and my team leadership has improved significantly.",
     rating: 5,
