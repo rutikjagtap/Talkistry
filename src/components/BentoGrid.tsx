@@ -8,7 +8,7 @@ const cards = [
     description: "Train with our AI-powered conversation partner",
     icon: <Bot className="w-6 h-6" />,
     color: "bg-blue-500",
-    link: "/ai-practice",
+    link: "https://animated-concha-27ca76.netlify.app/",
   },
   {
     title: "Writing Assistant",
