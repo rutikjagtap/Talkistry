@@ -15,14 +15,14 @@ const cards = [
     description: "Perfect your written communication",
     icon: <PenTool className="w-6 h-6" />,
     color: "bg-purple-500",
-    link: "/write", // Link to WritePage.tsx
+    link: "http://talkistry-practice-parker.surge.sh", // Link to WritePage.tsx
   },
   {
     title: "Smart Feedback",
     description: "Get instant, personalized feedback",
     icon: <Brain className="w-6 h-6" />,
     color: "bg-green-500",
-    link: "http://talkistry-practice-parker.surge.sh/",
+    link: "/write",
   },
   {
     title: "Community",
