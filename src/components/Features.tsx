@@ -4,8 +4,8 @@ import { motion } from "framer-motion";
 
 const features = [
   {
-    title: "Verbal Communication",
-    description: "Master the art of speaking with clarity and confidence in any situation.",
+    title: "Watch & Learn",
+    description: "Learn the language by watching engaging videos and improving your listening skills.",
     icon: <MessageCircle className="w-6 h-6" />,
     color: "bg-blue-500",
     link: "/videos",
@@ -18,22 +18,22 @@ const features = [
     link: "/stories", // ← This defines the path when user clicks it
   },
   {
-    title: "Presentation Skills",
-    description: "Deliver impactful presentations that captivate your audience.",
+    title: "Talk with AI",
+    description: "Practice real conversations with an AI bot to improve your spoken English.",
     icon: <Presentation className="w-6 h-6" />,
     color: "bg-pink-500",
     link: "https://krea.surge.sh/",
   },
   {
-    title: "AI-Powered Practice",
-    description: "Get instant feedback and personalized suggestions from our AI system.",
+    title: "Mock Interview with AI",
+    description: "Improve your interview skills by answering live questions from an AI interviewer.",
     icon: <Brain className="w-6 h-6" />,
     color: "bg-green-500",
     link: "https://cdn.botpress.cloud/webchat/v2.3/shareable.html?configUrl=https://files.bpcontent.cloud/2024/10/05/07/20241005073322-KI5B2E0W.json",
   },
   {
-    title: "Creative Writing",
-    description: "Develop your storytelling and creative writing abilities.",
+    title: "Word Quest Challenge",
+    description: "Learn new words through puzzles and challenges from indoor and outdoor locations.",
     icon: <PenTool className="w-6 h-6" />,
     color: "bg-yellow-500",
     link: "https://v0-interactive-english-app-kappa.vercel.app/",
