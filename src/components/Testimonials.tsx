@@ -4,21 +4,21 @@ import { Star, User } from "lucide-react";
 
 const testimonials = [
   {
-    name: "Sarah Johnson",
+    name: "Ashis Nikam",
     role: "Marketing Manager",
     content: "Talkistry transformed my presentation skills. I'm now more confident in client meetings and my team leadership has improved significantly.",
     rating: 5,
     avatar: "/placeholder.svg",
   },
   {
-    name: "David Chen",
+    name: "Amit Jha",
     role: "Software Engineer",
     content: "The AI-powered feedback helped me improve my communication with non-technical stakeholders. It's been a game-changer for my career.",
     rating: 5,
     avatar: "/placeholder.svg",
   },
   {
-    name: "Emily Rodriguez",
+    name: "Amey Pawar",
     role: "Sales Director",
     content: "The real-time feedback and practice scenarios helped me close 40% more deals. I highly recommend Talkistry to any sales professional.",
     rating: 5,
