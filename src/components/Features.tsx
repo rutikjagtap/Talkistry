@@ -22,7 +22,7 @@ const features = [
     description: "Practice real conversations with an AI bot to improve your spoken English.",
     icon: <Presentation className="w-6 h-6" />,
     color: "bg-pink-500",
-    link: "https://krea.surge.sh/",
+    link: "http://bolobhaiya.surge.sh/",
   },
   {
     title: "Mock Interview with AI",
