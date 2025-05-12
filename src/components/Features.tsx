@@ -11,8 +11,8 @@ const features = [
     link: "/videos",
   },
   {
-    title: "Social Scenarios",
-    description: "Navigate social interactions with ease...",
+    title: "Smart Reading Assistant",
+    description: "Read, listen, and record to improve your pronunciation and fluency.",
     icon: <Users className="w-6 h-6" />,
     color: "bg-purple-500",
     link: "/stories", // ← This defines the path when user clicks it
