@@ -33,7 +33,7 @@ const features = [
   },
   {
     title: "Word Quest Challenge",
-    description: "Learn new words through puzzles and challenges from indoor and outdoor locations.",
+    description: "Learn new words through puzzles and challenges from indoor and outdoor.",
     icon: <PenTool className="w-6 h-6" />,
     color: "bg-yellow-500",
     link: "https://v0-interactive-english-app-kappa.vercel.app/",
