@@ -1,4 +1,4 @@
-# Welcome to your Takistry project
+# Welcome to Takistry project
 
 # Talkistry – Communication Skills Learning Platform
 
